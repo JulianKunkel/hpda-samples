@@ -1,17 +1,20 @@
 #!/bin/bash
 
 VERSION=hadoop-3.3.1
-wget https://downloads.apache.org/hadoop/common/$VERSION/$VERSION.tar.gz 
 
-tar -xf $VERSION*gz
+if [[ ! -e $VERSION ]] ; then
+  wget https://downloads.apache.org/hadoop/common/$VERSION/$VERSION.tar.gz 
+  tar -xf $VERSION*gz
+fi
 
-echo "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" > /etc/environment
-
-ln -s $PWD/$VERSION hadoop
+if [[ ! -e hadoop ]] ; then 
+  echo "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" >> /etc/environment
+  ln -s $PWD/$VERSION hadoop
+fi
 
 echo Configuring Hadoop
-mkdir datanode
-mkdir namenode
+mkdir -p ../data/datanode
+mkdir ../data/namenode
 # See: https://tecadmin.net/install-hadoop-on-ubuntu-20-04/
 
 cat > hadoop/etc/hadoop/core-site.xml << EOF
@@ -32,12 +35,12 @@ cat > hadoop/etc/hadoop/hdfs-site.xml << EOF
  
         <property>
                 <name>dfs.name.dir</name>
-                <value>file:///DIR/namenode</value>
+                <value>file:///DIR/../data/namenode</value>
         </property>
  
         <property>
                 <name>dfs.data.dir</name>
-                <value>file:///DIR/datanode</value>
+                <value>file:///DIR/../data/datanode</value>
         </property>
 </configuration>
 EOF
