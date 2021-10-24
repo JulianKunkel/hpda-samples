@@ -14,7 +14,7 @@ mkdir datanode
 mkdir namenode
 # See: https://tecadmin.net/install-hadoop-on-ubuntu-20-04/
 
-cat >> hadoop/etc/hadoop/core-site.xml << EOF
+cat > hadoop/etc/hadoop/core-site.xml << EOF
 <configuration>
         <property>
                 <name>fs.defaultFS</name>
@@ -23,7 +23,7 @@ cat >> hadoop/etc/hadoop/core-site.xml << EOF
 </configuration>
 EOF
 
-cat >> hadoop/etc/hadoop/hdfs-site.xml << EOF
+cat > hadoop/etc/hadoop/hdfs-site.xml << EOF
 <configuration>
         <property>
                 <name>dfs.replication</name>
@@ -43,7 +43,7 @@ cat >> hadoop/etc/hadoop/hdfs-site.xml << EOF
 EOF
 sed -i "s#DIR#$PWD#" hadoop/etc/hadoop/hdfs-site.xml
 
-cat >> hadoop/etc/hadoop/mapred-site.xml << EOF
+cat > hadoop/etc/hadoop/mapred-site.xml << EOF
 <configuration>
         <property>
                 <name>mapreduce.framework.name</name>
@@ -52,7 +52,7 @@ cat >> hadoop/etc/hadoop/mapred-site.xml << EOF
 </configuration>
 EOF
 
-cat >> hadoop/etc/hadoop/yarn-site.xml << EOF
+cat > hadoop/etc/hadoop/yarn-site.xml << EOF
 <configuration>
         <property>
                 <name>yarn.nodemanager.aux-services</name>
