@@ -52,8 +52,22 @@ cat > hadoop/etc/hadoop/mapred-site.xml << EOF
                 <name>mapreduce.framework.name</name>
                 <value>yarn</value>
         </property>
-</configuration>
+        <property>
+          <name>yarn.app.mapreduce.am.env</name>
+          <value>HADOOP_MAPRED_HOME=DIR/hadoop</value>
+        </property>
+        <property>
+          <name>mapreduce.map.env</name>
+          <value>HADOOP_MAPRED_HOME=DIR/hadoop</value>
+        </property>
+        <property>
+          <name>mapreduce.reduce.env</name>
+          <value>HADOOP_MAPRED_HOME=DIR/hadoop</value>
+        </property>
+        </configuration>
 EOF
+sed -i "s#DIR#$PWD#" hadoop/etc/hadoop/mapred-site.xml
+
 
 cat > hadoop/etc/hadoop/yarn-site.xml << EOF
 <configuration>
