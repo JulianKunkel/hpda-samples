@@ -1,3 +1,3 @@
 #!/bin/bash
 
-apt install netcdf-bin
+apt install netcdf-bin ncview
