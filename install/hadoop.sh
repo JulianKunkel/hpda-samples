@@ -2,12 +2,12 @@
 
 VERSION=hadoop-3.3.1
 
-if [[ ! -e $VERSION ]] ; then
+if [[ ! -e $VERSION.tar.gz ]] ; then
   wget https://downloads.apache.org/hadoop/common/$VERSION/$VERSION.tar.gz 
-  tar -xf $VERSION*gz
 fi
 
 if [[ ! -e hadoop ]] ; then 
+  tar -xf $VERSION*gz
   echo "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" >> /etc/environment
   ln -s $PWD/$VERSION hadoop
 fi
