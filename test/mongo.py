@@ -11,5 +11,5 @@ collection = db['posts']
 
 post = {"author": "Mike", "text": "My first blog post!", "tags": ["mongodb", "python", "pymongo"], "date": datetime.datetime.utcnow()}
 
-post_id = posts.insert_one(post).inserted_id
+post_id = collection.insert_one(post).inserted_id
 print(db.list_collection_names())
