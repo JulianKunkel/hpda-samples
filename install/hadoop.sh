@@ -26,8 +26,8 @@ if [[ ! -e hadoop ]] ; then
   export HADOOP_YARN_HOME=$HADOOP_HOME
   export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/
   export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
-  export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/"
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HADOOP_HOME/lib/native
+  export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
+  export LD_LIBRARY_PATH=$HADOOP_HOME/lib/native
 
   echo "HADOOP_HOME is $HADOOP_HOME"
   echo "Writing variables into /home/$USER/.bashrc"
@@ -40,9 +40,9 @@ if [[ ! -e hadoop ]] ; then
   echo "export HADOOP_HDFS_HOME=$HADOOP_HOME" >> /home/$USER/.bashrc
   echo "export HADOOP_YARN_HOME=$HADOOP_HOME" >> /home/$USER/.bashrc
   echo "export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native" >> /home/$USER/.bashrc
-  echo "export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin" >> /home/$USER/.bashrc
-  echo "export HADOOP_OPTS=\"-Djava.library.path=$HADOOP_HOME/lib/\"" >> /home/$USER/.bashrc
-  echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HADOOP_HOME/lib/native" >> /home/$USER/.bashrc
+  echo "export PATH=\$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin" >> /home/$USER/.bashrc
+  echo "export HADOOP_OPTS=\"-Djava.library.path=$HADOOP_HOME/lib/native\"" >> /home/$USER/.bashrc
+  echo "export LD_LIBRARY_PATH=$HADOOP_HOME/lib/native" >> /home/$USER/.bashrc
 
   ln -s $HADOOP_HOME hadoop
 
@@ -121,12 +121,14 @@ EOF
 EOF
 
   export PATH=$PATH:$HADOOP_HOME/bin
-  echo "PATH=$PATH:/home/$USER/hadoop/hadoop/bin" >> /home/$USER/.bashrc
-  echo "PATH=$PATH:/home/$USER/hadoop/hadoop/sbin" >> /home/$USER/.bashrc
+  echo "PATH=\$PATH:/home/$USER/hadoop/hadoop/bin" >> /home/$USER/.bashrc
+  echo "PATH=\$PATH:/home/$USER/hadoop/hadoop/sbin" >> /home/$USER/.bashrc
 
 fi
 
 hdfs namenode -format 
+
+source /home/$USER/.bashrc
 
 start-dfs.sh
 
