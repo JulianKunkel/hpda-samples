@@ -6,7 +6,7 @@ if [ "$EUID" == 0 ]
 fi
 
 # See: https://tecadmin.net/install-hadoop-on-ubuntu-20-04/
-VERSION=hadoop-3.3.1
+VERSION=hadoop-3.4.1
 
 if [[ ! -e $VERSION.tar.gz ]] ; then
   wget https://downloads.apache.org/hadoop/common/$VERSION/$VERSION.tar.gz 
@@ -126,12 +126,6 @@ EOF
 
 fi
 
-hdfs namenode -format 
-
-source /home/$USER/.bashrc
-
-start-dfs.sh
-
-start-yarn.sh
+hdfs namenode -format
 
 hadoop fs -mkdir -p /data
